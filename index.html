@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사이버 폭력이란?</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f7f7f7;
+        }
+        #concept, #quiz {
+            display: none;
+            max-width: 600px;
+            width: 80%;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        #concept.active, #quiz.active {
+            display: block;
+        }
+        .character {
+            position: absolute;
+            left: -120px;
+            top: 20px;
+            width: 150px;
+            height: auto;
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        ul {
+            text-align: left;
+            margin: 0;
+            padding: 0;
+        }
+        ul li {
+            margin-bottom: 10px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        input {
+            margin-top: 10px;
+            padding: 10px;
+            font-size: 16px;
+            width: calc(100% - 22px);
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .success {
+            color: green;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- 개념 설명 -->
+    <div id="concept" class="active">
+        <img src="char.png" alt="디지털 윤리 지킴이" class="character">
+        <div>
+            <h2>사이버 폭력이란?</h2>
+            <p>사이버 폭력은 온라인에서 상대방을 괴롭히거나 피해를 주는 행동입니다.</p>
+            <h3>사이버 폭력의 주요 유형</h3>
+            <ul>
+                <li><strong>비방:</strong> 인터넷이나 SNS에서 특정 인물을 나쁘게 말하거나 헐뜯는 행동.</li>
+                <li><strong>따돌림:</strong> 채팅방에서 특정 인물을 고의적으로 제외하거나 무시하는 행동.</li>
+                <li><strong>허위 사실 유포:</strong> 거짓 정보를 퍼뜨려 상대방의 명예를 훼손하는 행동.</li>
+            </ul>
+            <h3>사이버 폭력의 결과</h3>
+            <p>피해자는 심리적 고통을 겪고, 가해자는 법적인 처벌을 받을 수 있습니다. 따라서 우리는 온라인에서 책임감 있게 행동해야 합니다.</p>
+            <button onclick="showQuiz()">이해하셨으면 이 버튼을 눌러주세요</button>
+        </div>
+    </div>
+
+    <!-- 퀴즈 -->
+    <div id="quiz">
+        <img src="char.png" alt="디지털 윤리 지킴이" class="character">
+        <div>
+            <h2>퀴즈</h2>
+            <p>사이버 폭력의 한 가지 유형을 적어보세요.</p>
+            <input type="text" id="answer" placeholder="정답을 입력하세요" />
+            <button onclick="checkAnswer()">제출</button>
+            <p id="feedback"></p>
+        </div>
+    </div>
+
+    <script>
+        function showQuiz() {
+            // 개념 설명 숨기고 퀴즈 보여주기
+            document.getElementById("concept").classList.remove("active");
+            document.getElementById("quiz").classList.add("active");
+
+            // 이전 상태 초기화
+            document.getElementById("answer").value = ""; // 입력 필드 초기화
+            document.getElementById("feedback").textContent = ""; // 피드백 초기화
+        }
+
+        function showConcept() {
+            // 퀴즈 숨기고 개념 설명 다시 보여주기
+            document.getElementById("quiz").classList.remove("active");
+            document.getElementById("concept").classList.add("active");
+
+            // 입력 필드와 피드백 초기화
+            document.getElementById("answer").value = ""; // 입력 필드 초기화
+            document.getElementById("feedback").textContent = ""; // 피드백 초기화
+        }
+
+        function checkAnswer() {
+            const correctAnswers = ["비방", "따돌림", "허위 사실 유포"];
+            const userAnswer = document.getElementById("answer").value.trim();
+
+            const feedback = document.getElementById("feedback");
+            if (correctAnswers.includes(userAnswer)) {
+                feedback.textContent = "정답입니다! 1-A 교실의 비밀번호는 '1234'입니다.";
+                feedback.className = "success";
+            } else {
+                feedback.textContent = "오답입니다. 다시 개념을 복습해주세요.";
+                feedback.className = "error";
+                setTimeout(showConcept, 2000); // 2초 후 개념 설명으로 이동
+            }
+        }
+    </script>
+</body>
+</html>
